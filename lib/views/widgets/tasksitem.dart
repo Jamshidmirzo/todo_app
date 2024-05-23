@@ -8,6 +8,7 @@ class Tasksitem extends StatefulWidget {
   final Tasks task;
   int index;
   Function(int) onDelete;
+
   Tasksitem({required this.task, required this.index, required this.onDelete});
   @override
   State<Tasksitem> createState() => _TasksitemState();
@@ -20,7 +21,7 @@ class _TasksitemState extends State<Tasksitem> {
       leading: Checkbox(
           onChanged: (value) {
             widget.task.ischechked = value!;
-            widget.onDelete(widget.index);
+            setState(() {});
           },
           value: widget.task.ischechked),
       title: Text(
@@ -30,8 +31,14 @@ class _TasksitemState extends State<Tasksitem> {
       subtitle: Text(
         widget.task.subtitle,
       ),
+      trailing: IconButton(
+          onPressed: () {
+            widget.onDelete(widget.index);
+          },
+          icon: const Icon(
+            Icons.delete,
+            color: Colors.red,
+          )),
     );
   }
 }
-
-//  widget.onDelete(widget.index);
